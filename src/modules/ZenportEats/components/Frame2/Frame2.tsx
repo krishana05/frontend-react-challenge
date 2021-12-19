@@ -1,5 +1,5 @@
 import { ContainerStyle, FoodSelectionContainer, SectionStyle } from './styles';
-import { FoodTypes, foods } from '@modules/ZenportEats/data/food-menu';
+import { FoodTypes } from '@modules/ZenportEats/data/food-menu';
 
 import FoodSelection from '@components/FoodSelection';
 import FoodTypeTabs from '@components/FoodTypeTabs';
@@ -10,18 +10,20 @@ import { useZenportEats } from '@modules/ZenportEats/hooks/useZenportEats';
 const Frame2 = () => {
   const {
     order,
+    foods,
+    setFoods,
     setPage,
     selectedIdx,
     setSelectedIdx,
     handleFoodItemAdd,
     handlePersonDelete,
     handlePersonAdd,
+    handleFoodTypeChange,
   } = useZenportEats();
-
   return (
     <ContainerStyle>
       <SectionStyle $padding $width={350}>
-        <FoodTypeTabs />
+        <FoodTypeTabs onFoodTypeChange={handleFoodTypeChange} />
         <FoodSelectionContainer>
           {Object.keys(foods).map((foodType) => {
             return (

@@ -7,7 +7,7 @@ export interface FoodMenuItem {
 
 export type FoodTypes = 'Maki' | 'Entree' | 'Appetizer' | 'Nigiri';
 
-type FoodMenu = {
+export type FoodMenu = {
   [key in FoodTypes]: FoodMenuItem[];
 };
 

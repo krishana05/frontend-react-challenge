@@ -7,12 +7,14 @@ import React, {
   useState,
 } from 'react';
 
-import { FoodMenuItem } from '../data/food-menu';
+import { FoodMenuItem, FoodTypes, foods as availableFoods, FoodMenu } from '../data/food-menu';
 import { Order } from '../types';
 
 interface ZenportEatsContextProps {
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
+  foods: FoodMenu;
+  setFoods: Dispatch<SetStateAction<FoodMenu>>;
   order: Order;
   setOrder: Dispatch<SetStateAction<Order>>;
   selectedIdx: number;
@@ -20,6 +22,7 @@ interface ZenportEatsContextProps {
   handleFoodItemAdd: (foodItem: FoodMenuItem) => void;
   handlePersonDelete: (personIdx: number) => void;
   handlePersonAdd: () => void;
+  handleFoodTypeChange: (tyep: FoodTypes) => void;
 }
 
 /* eslint-disable */
@@ -31,6 +34,8 @@ const defaultOrder = {
 const ZenportEatsContext = createContext<ZenportEatsContextProps>({
   page: 1,
   setPage: () => {},
+  foods: availableFoods,
+  setFoods: () => {},
   order: defaultOrder,
   setOrder: () => {},
   selectedIdx: 0,
@@ -38,6 +43,7 @@ const ZenportEatsContext = createContext<ZenportEatsContextProps>({
   handleFoodItemAdd: () => {},
   handlePersonDelete: () => {},
   handlePersonAdd: () => {},
+  handleFoodTypeChange: () => {},
 });
 
 interface Props {
@@ -47,6 +53,7 @@ interface Props {
 export const ZenportEatsProvider = ({ children }: Props) => {
   const [page, setPage] = useState(1);
   const [order, setOrder] = useState<Order>(defaultOrder);
+  const [foods, setFoods] = useState<FoodMenu>(availableFoods);
   const [selectedIdx, setSelectedIdx] = useState(0);
 
   const handleFoodItemAdd = (foodItem: FoodMenuItem) => {
@@ -92,12 +99,21 @@ export const ZenportEatsProvider = ({ children }: Props) => {
 
     setOrder(newOrder);
   }, []);
+  const handleFoodTypeChange = useCallback((type) => {
+    if (type) {
+      let newFoods: any = {};
+      newFoods[type as FoodTypes] = foods[type as FoodTypes];
+      setFoods(newFoods);
+    } else setFoods(foods);
+  }, []);
 
   return (
     <ZenportEatsContext.Provider
       value={{
         page,
         setPage,
+        foods,
+        setFoods,
         order,
         setOrder,
         selectedIdx,
@@ -105,6 +121,7 @@ export const ZenportEatsProvider = ({ children }: Props) => {
         handleFoodItemAdd,
         handlePersonDelete,
         handlePersonAdd,
+        handleFoodTypeChange,
       }}
     >
       {children}

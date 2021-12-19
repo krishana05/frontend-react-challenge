@@ -14,14 +14,15 @@ const images = {
   Nigiri: '/icons/nigiri.png',
 };
 
-const FoodTypeTabs = () => {
+const FoodTypeTabs = ({ onFoodTypeChange }: any) => {
   const [selectedTab, setSelectedTab] = useState<string | null>(null);
-
   return (
     <TabsStyle
       tabBarGutter={25}
       onTabClick={(activeKey: string) => {
-        setSelectedTab(selectedTab === activeKey ? null : activeKey);
+        const tab = selectedTab === activeKey ? null : activeKey;
+        setSelectedTab(tab);
+        onFoodTypeChange(tab);
       }}
       $isDisabled={!selectedTab}
     >
