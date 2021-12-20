@@ -11,7 +11,6 @@ const Frame2 = () => {
   const {
     order,
     foods,
-    setFoods,
     setPage,
     selectedIdx,
     setSelectedIdx,

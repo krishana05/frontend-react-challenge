@@ -76,16 +76,16 @@ export const ZenportEatsProvider = ({ children }: Props) => {
     });
   };
 
-  const handlePersonDelete = useCallback((personIdx: number) => {
+  const handlePersonDelete = (personIdx: number) => {
     const newOrder = {
       ...order,
       orders: order.orders.filter((_, orderIdx) => orderIdx !== personIdx),
     };
 
     setOrder(newOrder);
-  }, []);
+  };
 
-  const handlePersonAdd = useCallback(() => {
+  const handlePersonAdd = () => {
     const newOrder = {
       ...order,
       orders: [
@@ -98,7 +98,7 @@ export const ZenportEatsProvider = ({ children }: Props) => {
     };
 
     setOrder(newOrder);
-  }, []);
+  };
   const handleFoodTypeChange = useCallback((type) => {
     if (type) {
       let newFoods: any = {};
