@@ -86,12 +86,14 @@ export const ZenportEatsProvider = ({ children }: Props) => {
   };
 
   const handlePersonAdd = () => {
+    //trying to read last person's index and then will increment in last person's index
+    const lastPersonIndex = Number(order.orders[order.orders.length - 1].name.split(' ')[1]);
     const newOrder = {
       ...order,
       orders: [
         ...order.orders,
         {
-          name: `Person ${order.orders.length + 1}`,
+          name: `Person ${lastPersonIndex + 1}`,
           items: [],
         },
       ],
