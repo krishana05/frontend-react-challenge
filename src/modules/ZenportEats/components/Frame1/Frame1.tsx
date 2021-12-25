@@ -6,8 +6,12 @@ import { UserOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { useZenportEats } from '@modules/ZenportEats/hooks/useZenportEats';
 
-const Frame1 = () => {
-  const { setOrder, setPage } = useZenportEats();
+interface Props {
+  onNextPageUpdate: (page: number) => void;
+}
+
+const Frame1 = ({ onNextPageUpdate }: Props) => {
+  const { setOrder } = useZenportEats();
 
   const [value, setValue] = useState(0);
   const isInvalidValue = value < 1 || value > 10;
@@ -43,7 +47,7 @@ const Frame1 = () => {
                 };
               }),
           });
-          setPage(2);
+          onNextPageUpdate(2);
         }}
       >
         Next

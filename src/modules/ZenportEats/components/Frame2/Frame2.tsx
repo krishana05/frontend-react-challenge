@@ -7,11 +7,14 @@ import OrderDetailCard from '@components/OrderDetailCard/OrderDetailCard';
 import OrderTotalCard from '@components/OrderTotalCard';
 import { useZenportEats } from '@modules/ZenportEats/hooks/useZenportEats';
 
-const Frame2 = () => {
+interface Props {
+  onNextPageUpdate: (page: number) => void;
+}
+
+const Frame2 = ({ onNextPageUpdate }: Props) => {
   const {
     order,
     foods,
-    setPage,
     selectedIdx,
     setSelectedIdx,
     handleFoodItemAdd,
@@ -63,7 +66,7 @@ const Frame2 = () => {
           order={order}
           onAddPersonClick={handlePersonAdd}
           onNextClick={() => {
-            setPage(3);
+            onNextPageUpdate(3);
           }}
         />
       </SectionStyle>

@@ -9,8 +9,12 @@ import { useZenportEats } from '@modules/ZenportEats/hooks/useZenportEats';
 
 const { Title, Text } = Typography;
 
-const Frame3 = () => {
-  const { order, setPage } = useZenportEats();
+interface Props {
+  onNextPageUpdate: (page: number) => void;
+}
+
+const Frame3 = ({ onNextPageUpdate }: Props) => {
+  const { order } = useZenportEats();
 
   return (
     <ContainerStyle>
@@ -31,7 +35,7 @@ const Frame3 = () => {
         type="primary"
         size="large"
         onClick={() => {
-          setPage(2);
+          onNextPageUpdate(2);
         }}
       >
         Change my order

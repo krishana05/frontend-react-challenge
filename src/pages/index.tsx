@@ -1,12 +1,16 @@
-import { ZenportEatsProvider, useZenportEats } from '@modules/ZenportEats/hooks/useZenportEats';
+import { ZenportEatsProvider } from '@modules/ZenportEats/hooks/useZenportEats';
 
 import Head from 'next/head';
 import Header from '@components/Header';
 import type { NextPage } from 'next';
+import { useState } from 'react';
 import ZenportEats from '../modules/ZenportEats';
 
 const Home: NextPage = () => {
-  const { setPage } = useZenportEats();
+  let [newPageNumber, setNewPageNumber] = useState(1); // Creating a new local state which will be passed to ZenportEats
+  const nextBtnHandler = (num: number) => {
+    setNewPageNumber(num);
+  };
   return (
     <>
       <Head>
@@ -16,12 +20,12 @@ const Home: NextPage = () => {
       </Head>
       <Header
         onIconClick={() => {
-          setPage(1);
+          setNewPageNumber(1);
         }}
       />
 
       <ZenportEatsProvider>
-        <ZenportEats />
+        <ZenportEats page={newPageNumber} onNextClick={nextBtnHandler} />
       </ZenportEatsProvider>
     </>
   );

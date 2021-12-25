@@ -22,7 +22,7 @@ interface ZenportEatsContextProps {
   handleFoodItemAdd: (foodItem: FoodMenuItem) => void;
   handlePersonDelete: (personIdx: number) => void;
   handlePersonAdd: () => void;
-  handleFoodTypeChange: (tyep: FoodTypes) => void;
+  handleFoodTypeChange: (type: FoodTypes) => void;
 }
 
 /* eslint-disable */
